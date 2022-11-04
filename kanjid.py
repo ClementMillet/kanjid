@@ -8,8 +8,8 @@ import cv2
 import numpy as np
 from jisho import Client
 
-
-@Gtk.Template(filename="main_window.ui")
+dir = os.path.dirname(os.path.realpath(__file__))
+@Gtk.Template(filename=dir+"/main_window.ui")
 class Window1(Gtk.ApplicationWindow):
     __gtype_name__ = "window1"
     
@@ -35,6 +35,7 @@ class Window1(Gtk.ApplicationWindow):
         screen_action = Gio.SimpleAction(name="screen")
         open_action.connect("activate", self.open_file_dialog)
         screen_action.connect("activate", self.make_screenshot)
+        self.connect("destroy", Gtk.main_quit)
         self.add_action(open_action)
         self.add_action(screen_action)
 
